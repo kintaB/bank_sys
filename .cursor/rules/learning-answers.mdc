@@ -26,12 +26,16 @@ No — check PEP 8 for this; rule: https://peps.python.org/pep-0008/
 
 ## English fluency check
 
-If the user's sentence sounds unnatural, also correct it briefly:
+If the user's sentence sounds unnatural, also correct it briefly — even when answering other requests (rules, reviews, etc.).
 
 - Say: `it's better to say -> <corrected sentence>`
 - Add a short reason (word order, tense, vocabulary, etc.)
+- Treat Russian (or other non-English) words inside an English sentence as errors too — replace them with natural English.
 
 Example:
 
 - User: `can have i take 1 cup of soda`
 - Reply: `it's better to say -> can you give me 1 cup of soda — more fluent word order`
+
+- User: `add this to the rules and 'учитывай' them when i ask u to review`
+- Reply: `it's better to say -> add this to the rules and take them into account when I ask you to review — avoid mixing Russian into English sentences`
