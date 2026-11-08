@@ -1,43 +1,103 @@
-'''
-TODO Add this errors
- AccountFrozenError 
- AccountClosedError
- InvalidOperationError
- InsufficientFundsError
-'''
+from abc import ABC, abstractmethod
+import uuid
+from dataclasses import dataclass
 
+class AccountFrozenError(Exception):
+    def __init__(self, *args):
+        if args:
+            self.message = args[0]
+        else:
+            self.message = None
+    
+    def __str__(self):
+        print('calling magic method str')
+        if self.message:
+            return f'AccountFrozenError'
+        else:
+            return 'AccountFrozenError has been raised'
+
+
+class AccountClosedError(Exception):
+    def __init__(self, *args):
+        if args:
+            self.message = args[0]
+        else:
+            self.message = None
+    
+    def __str__(self):
+        print('calling magic method str')
+        if self.message:
+            return f'AccountFrozenError, '
+        else:
+            return 'AccountFrozenError has been raised'
+
+class InvalidOperationError(Exception):
+    def __init__(self, *args):
+        if args:
+            self.message = args[0]
+        else:
+            self.message = None
+    
+    def __str__(self):
+        print('calling magic method str')
+        if self.message:
+            return f'InvalidOperationError, '
+        else:
+            return 'InvalidOperationError has been raised'
+
+class InsufficientFundsError(Exception):
+    def __init__(self, *args):
+        if args:
+            self.message = args[0]
+        else:
+            self.message = None
+    
+    def __str__(self):
+        print('calling magic method str')
+        if self.message:
+            return f'InsufficientFundsError'
+        else:
+            return 'InsufficientFundsError has been raised'
+
+@dataclass
 class ClientData:
     name: str
     surname: str
-    account_number: int
+    account_number: str | None = None
 
-
-class AbstractAccount:
+class AbstractAccount(ABC):
     def __init__(self, id: int, client_data: ClientData, guarded_balance: float, account_status: ('active', 'frozen', 'closed')):
         self.id = id 
-        self.clien_data = client_data
+        self.client_data = client_data
         self.guarded_balance = guarded_balance
         self.account_status = account_status
 
+    @abstractmethod
     def get_account_info(self):
-        # TODO create dict for returning object
-        return self.client_data, self.id, self.guarded_balance, self.account_status
+        pass
     
-    def deposit(self, amount): 
-        if amount > 0:
-            self.guarded_balance += amount
-            print('amount added')
+    @abstractmethod
+    def deposit(self, amount):
+        pass
     
-    def withdraw(self, amount, guarded_balance): 
-        if amount > 0 and guarded_balance >= amount:
-            self.guarded_balance -= amount
-            print('withdraw approve')
+    @abstractmethod
+    def withdraw(self, amount):
+        pass
         
 # TODO what is логические статусы и запрет операций при неверных статусах
 class BankAccount(AbstractAccount):
 
-    def __init__(self, currency: ('RUB', 'USD', 'EUR', 'KZT', 'CNY')):
+    def __init__(self, id, client_data, guarded_balance, account_status, currency: ('RUB', 'USD', 'EUR', 'KZT', 'CNY')):
         self.currency = currency
+        super().__init__(id, client_data, guarded_balance, account_status)
+        if self.client_data.account_number is None or self.client_data.account_number == '' :
+            client_uuid = uuid.uuid1()
+            self.client_data.account_number = str(client_uuid)
+            print(f'its yours uuid{client_uuid}')
+        
+
+    def __str__(self):
+        return f'BankAccount: {self.client_data},{self.guarded_balance},{self.account_status},{self.client_data.account_number[-4:]},{self.currency}'
 
     def validate_client_data(client_data):
         # future logic
@@ -47,8 +107,33 @@ class BankAccount(AbstractAccount):
         print('smth')
         return self
     
-    def generate_uuid(account_number: int):
-        if account_number == 0:
-            print('create uuid')
-            
-
+    def get_account_info(self):
+        # TODO create dict for returning object
+        return self.client_data, self.id, self.guarded_balance, self.account_status
+    
+    def deposit(self, amount):
+        if self.account_status == 'frozen':
+            raise AccountFrozenError(f'account with {self.id} is frozen') 
+        if self.account_status == 'closed':
+            raise AccountClosedError(f'account with {self.id} is closed') 
+        elif amount < 0:
+            raise InvalidOperationError(f'You doing something wrong')
+        elif amount > 0:
+            self.guarded_balance += amount
+            print('amount added')
+        else:
+            print('something went wrong')
+    
+    def withdraw(self, amount): 
+        if self.account_status == 'frozen':
+            raise AccountFrozenError(f'account with {self.id} is frozen') 
+        if self.account_status == 'closed':
+            raise AccountClosedError(f'account with {self.id} is closed') 
+        elif amount > 0:
+            if self.guarded_balance < amount:
+                raise InsufficientFundsError(f'Insufficient Funds, deposit to continue operation')
+            else:
+                self.guarded_balance -= amount
+                print('withdraw complete')
+        else:
+            print('something went wrong')
