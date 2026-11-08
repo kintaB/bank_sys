@@ -1,0 +1,51 @@
+---
+description: Bank system homework goals, boundaries, and OOP principles for code reviews
+alwaysApply: true
+---
+
+# Bank System Project Rules
+
+When the user asks to review code, take these rules into account (`учитывай`).
+
+Keep review feedback short: 1–2 sentences, point out the issue, give a hint — do not rewrite their code unless they ask.
+
+## Project goal
+
+Build a multi-level banking system with account models, transactions, audit, reporting, security ideas, and extensibility — as OOP modules in Python.
+
+The project has 7 stages (7 days) plus final integration. Each stage should deepen the previous one.
+
+## Boundaries
+
+- Keep data in memory only — no database.
+- No external APIs or third-party integrations.
+- Financial entities are educational OOP models, not a real banking or investment system.
+
+## Overall concept
+
+Support:
+
+- different bank account types
+- account operations with logging and audit
+- centralized management of all bank clients
+- transaction history with extended parameters
+- analytical report generation
+- data validation and an error system
+- extensibility for future account types and operations
+
+## Key principles to check in reviews
+
+Prefer designs that show:
+
+- encapsulation
+- inheritance
+- polymorphism
+- abstraction
+- SOLID principles
+- domain modeling
+- structured logging
+- modules ready for unit testing
+
+## Review focus
+
+Judge the code against the current homework day first, then against these project principles — only mention principles that are relevant to what they asked you to review.
