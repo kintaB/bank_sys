@@ -1,13 +1,13 @@
 from abc import ABC, abstractmethod
 import uuid
-from src.models import ClientData
+from src.models import ClientData, AccountStatus, Currencies
 from src.exceptions import AccountFrozenError, InsufficientFundsError, AccountClosedError, InvalidOperationError
 
 class AbstractAccount(ABC):
-    def __init__(self, id: int, client_data: ClientData, guarded_balance: float, account_status: ('active', 'frozen', 'closed')):
+    def __init__(self, id: int, client_data: ClientData, _balance: float, account_status: AccountStatus):
         self.id = id 
         self.client_data = client_data
-        self.guarded_balance = guarded_balance
+        self._balance = _balance
         self.account_status = account_status
 
     @abstractmethod
@@ -27,21 +27,36 @@ class AbstractAccount(ABC):
 # TODO add operation commision
 class BankAccount(AbstractAccount):
 
-    def __init__(self, id, client_data, guarded_balance, account_status, currency: ('RUB', 'USD', 'EUR', 'KZT', 'CNY')):
+    def __init__(self, id, client_data, _balance, account_status, currency: Currencies):
         self.currency = currency
-        super().__init__(id, client_data, guarded_balance, account_status)
+        super().__init__(id, client_data, _balance, account_status)
+        self.validate_data()
         if self.client_data.account_number is None or self.client_data.account_number == '' :
-            client_uuid = uuid.uuid1()
-            self.client_data.account_number = str(client_uuid)
-            print(f'its yours uuid{client_uuid}')
+            self.client_data.account_number = str(uuid.uuid4())[:8]
+            print(f'its yours uuid{self.client_data.account_number}')
         
 
     def __str__(self):
-        return f'BankAccount: {self.client_data},{self.guarded_balance},{self.account_status},{self.client_data.account_number[-4:]},{self.currency}'
+        return f'BankAccount: {self.client_data.name},{self.client_data.surname},{self.client_data.account_number[-4:]},{self._balance},{self.account_status},{self.currency}'
 
-    def validate_client_data(client_data):
-        # future logic
-        return client_data
+    def validate_data(self):
+        if self.account_status not in AccountStatus:
+            raise InvalidOperationError(f'Invalid account status: {self.account_status}')
+        if self.currency not in Currencies:
+            raise InvalidOperationError(f'Invalid account currency: {self.currency}')
+        if self._balance < 0:
+            raise InvalidOperationError(f'Initial balance can not be negative: {self._balance}')
+
+    def _ensure_active(self):
+        if self.account_status == AccountStatus.ACTIVE:
+            return
+        if self.account_status == AccountStatus.FROZEN:
+            raise AccountFrozenError(f'account with id: {self.id} is frozen') 
+        if self.account_status == AccountStatus.CLOSED:
+            raise AccountClosedError(f'account with id: {self.id} is closed') 
+        else: 
+            raise InvalidOperationError(f'Something went wrong')
+        
 
     def status_logger(self):
         print('smth')
@@ -49,31 +64,21 @@ class BankAccount(AbstractAccount):
     
     def get_account_info(self):
         # TODO create dict for returning object
-        return self.client_data, self.id, self.guarded_balance, self.account_status
+        return self.client_data, self.id, self._balance, self.account_status
     
     def deposit(self, amount):
-        if self.account_status == 'frozen':
-            raise AccountFrozenError(f'account with {self.id} is frozen') 
-        if self.account_status == 'closed':
-            raise AccountClosedError(f'account with {self.id} is closed') 
-        elif amount < 0:
-            raise InvalidOperationError(f'You doing something wrong')
-        elif amount > 0:
-            self.guarded_balance += amount
-            print('amount added')
-        else:
-            print('something went wrong')
+        self._ensure_active()
+        if amount <= 0:
+            raise InvalidOperationError(f'Invalid amount: {amount}')
+        self._balance += amount
+        print('Operation complete')
+        
     
     def withdraw(self, amount): 
-        if self.account_status == 'frozen':
-            raise AccountFrozenError(f'account with {self.id} is frozen') 
-        if self.account_status == 'closed':
-            raise AccountClosedError(f'account with {self.id} is closed') 
-        elif amount > 0:
-            if self.guarded_balance < amount:
-                raise InsufficientFundsError(f'Insufficient Funds, deposit to continue operation')
-            else:
-                self.guarded_balance -= amount
-                print('withdraw complete')
-        else:
-            print('something went wrong')
+        self._ensure_active()
+        if amount <= 0:
+            raise InvalidOperationError(f'Invalid amount: {amount}')
+        if self._balance < amount:
+            raise InsufficientFundsError(f'Insufficient Funds, deposit to continue operation')
+        self._balance -= amount
+        print('Operation complete')
