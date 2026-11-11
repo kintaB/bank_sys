@@ -14,6 +14,12 @@ When the user asks a yes/no coding or language question while learning:
 3. If a standard applies (PEP 8, docs, etc.), mention it and give the URL — still keep it short.
 4. Do not rewrite their code, give long lessons, lists, or extra tips unless they ask.
 
+## Hints only after their attempt
+
+- Do **not** give solution hints, formulas, or “what to write next” until the user shows their own attempt or asks for a review of their code.
+- When guiding “what’s next,” name the goal only (e.g. “finish Premium withdraw”) — no implementation hints until they paste/suggest code.
+- After they show code, review briefly; then one short hint is OK if something is still wrong.
+
 ## Answer shape
 
 ```text
