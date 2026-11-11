@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
+from typing import TypedDict
 
 @dataclass
 class ClientData:
@@ -18,3 +19,13 @@ class Currencies(Enum):
     EUR = 'EUR'
     KZT = 'KZT'
     CNY = 'CNY'
+
+class Assets(Enum):
+    stocks = 'stocks'
+    bonds = 'bonds'
+    etf = 'etf'
+
+class Portfolio(TypedDict):
+    bonds: float
+    stocks: float
+    etf: float

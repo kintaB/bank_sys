@@ -19,6 +19,7 @@ try:
 except InsufficientFundsError as e:
     print(e)
 print(new_account)
+print(new_account.get_account_info())
 
 try:
     new_account2.deposit(555)

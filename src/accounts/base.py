@@ -63,9 +63,17 @@ class BankAccount(AbstractAccount):
         return self
     
     def get_account_info(self):
-        # TODO create dict for returning object
-        return self.client_data, self.id, self._balance, self.account_status
-    
+        account_info = {
+            'id': self.id,
+            'name': self.client_data.name,
+            'surname': self.client_data.surname,
+            'account_number': self.client_data.account_number[-4:],
+            'balance': self._balance,
+            'status': self.account_status,
+            'currency': self.currency
+        }
+        return account_info
+        
     def deposit(self, amount):
         self._ensure_active()
         if amount <= 0:
