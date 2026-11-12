@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import math
 import uuid
 from src.models import ClientData, AccountStatus, Currencies
 from src.exceptions import AccountFrozenError, InsufficientFundsError, AccountClosedError, InvalidOperationError
@@ -23,8 +24,7 @@ class AbstractAccount(ABC):
         pass
         
 # TODO what is логические статусы и запрет операций при неверных статусах
-# TODO add limits, probably limits on payment(переводы)
-# TODO add operation commision
+
 class BankAccount(AbstractAccount):
 
     def __init__(self, id, client_data, _balance, account_status, currency: Currencies):
@@ -40,9 +40,9 @@ class BankAccount(AbstractAccount):
         return f'BankAccount: {self.client_data.name},{self.client_data.surname},{self.client_data.account_number[-4:]},{self._balance},{self.account_status},{self.currency}'
 
     def validate_data(self):
-        if self.account_status not in AccountStatus:
+        if not isinstance(self.account_status, AccountStatus):
             raise InvalidOperationError(f'Invalid account status: {self.account_status}')
-        if self.currency not in Currencies:
+        if not isinstance(self.currency, Currencies):
             raise InvalidOperationError(f'Invalid account currency: {self.currency}')
         if self._balance < 0:
             raise InvalidOperationError(f'Initial balance can not be negative: {self._balance}')
@@ -73,19 +73,25 @@ class BankAccount(AbstractAccount):
             'currency': self.currency
         }
         return account_info
+
+    def _ensure_amount(self, amount):
+        if not isinstance(amount, (float, int)) or isinstance(amount, bool):
+            raise InvalidOperationError(f'Invalid amount: {amount}')
+        if not math.isfinite(amount):
+            raise InvalidOperationError(f'Invalid amount: {amount}')
+        if amount <= 0:
+            raise InvalidOperationError(f'Invalid amount: {amount}')
         
     def deposit(self, amount):
         self._ensure_active()
-        if amount <= 0:
-            raise InvalidOperationError(f'Invalid amount: {amount}')
+        self._ensure_amount(amount)
         self._balance += amount
         print('Operation complete')
         
     
     def withdraw(self, amount): 
         self._ensure_active()
-        if amount <= 0:
-            raise InvalidOperationError(f'Invalid amount: {amount}')
+        self._ensure_amount(amount)
         if self._balance < amount:
             raise InsufficientFundsError(f'Insufficient Funds, deposit to continue operation')
         self._balance -= amount

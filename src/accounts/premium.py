@@ -32,9 +32,7 @@ class PremiumAccount(BankAccount):
     
     def withdraw(self, amount): 
         self._ensure_active()
-
-        if amount <= 0:
-            raise InvalidOperationError(f'Invalid amount: {amount}')
+        self._ensure_amount(amount)
 
         total = amount + self.commission # 300
         # a = 200 wl = 500

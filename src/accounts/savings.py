@@ -32,9 +32,8 @@ class SavingsAccount(BankAccount):
     
     def withdraw(self, amount): 
         self._ensure_active()
+        self._ensure_amount(amount)
         potential_balance = self._balance - amount
-        if amount <= 0:
-            raise InvalidOperationError(f'Invalid amount: {amount}')
         if potential_balance < self.min_balance:
             raise InvalidOperationError(f'Operation abort, balance can not be lower than minimum balance: {self.min_balance}')
         self._balance -= amount

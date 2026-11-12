@@ -29,18 +29,18 @@ class InvestmentAccount(BankAccount):
     
     def withdraw(self, amount): 
         self._ensure_active()
+        self._ensure_amount(amount)
         total = self._balance - amount
 
-        if amount <= 0:
-            raise InvalidOperationError(f'Invalid amount: {amount}')
-        
-        if total <= 0:
+        if total < 0:
             raise InsufficientFundsError(f'InsufficientFundsError')
 
         self._balance -= amount
 
     def invest(self, amount, asset):
-        if asset in Assets and amount > 0 and amount <= self._balance:
+        self._ensure_active()
+        self._ensure_amount(amount)
+        if isinstance(asset, Assets) and amount <= self._balance:
             self._balance -= amount
             self.portfolio[asset.value] += amount
                
@@ -59,11 +59,12 @@ class InvestmentAccount(BankAccount):
         stocks_growth = self.portfolio['stocks'] * growth_rates['stocks']
         bonds_growth = self.portfolio['bonds'] * growth_rates['bonds']
         etf_growth = self.portfolio['etf'] * growth_rates['etf']
-
-        growths_info = {
-            'stocks_growth': stocks_growth,
-            'bonds_growth': bonds_growth,
-            'etf_growth': etf_growth
-        }
-
-        return growths_info
+        
+        # growths_info = {
+        #    'stocks_growth': stocks_growth,
+        #    'bonds_growth': bonds_growth,
+        #    'etf_growth': etf_growth
+        # }
+        
+        total_growth = stocks_growth + bonds_growth + etf_growth
+        return total_growth
