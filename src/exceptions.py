@@ -9,3 +9,15 @@ class InvalidOperationError(Exception):
 
 class InsufficientFundsError(Exception):
     pass
+
+class YoungClientError(Exception):
+    pass
+
+class AuthentificateFailedError(Exception):
+    pass
+
+class TooManyAttemptsError(Exception):
+    pass
+
+class DayTimeOperationError(Exception):
+    pass

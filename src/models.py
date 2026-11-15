@@ -6,12 +6,16 @@ from typing import TypedDict
 class ClientData:
     name: str
     surname: str
-    account_number: str | None = None
 
 class AccountStatus(Enum):
     ACTIVE = 'active'
     FROZEN = 'frozen'
     CLOSED = 'closed'
+
+class ClientStatus(Enum):
+    ACTIVE = 'active'
+    BLOCKED = 'blocked'
+    DEPRECATED = 'deprecated'
 
 class Currencies(Enum):
     RUB = 'RUB'

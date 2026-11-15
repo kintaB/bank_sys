@@ -13,14 +13,14 @@ class SavingsAccount(BankAccount):
         self._balance += self._balance * self.monthly_interest_rate
 
     def __str__(self):
-        return f'SavingsAccount: {self.client_data.name}, {self.client_data.surname}, {self.client_data.account_number[-4:]}, {self._balance}, {self.min_balance}, {self.account_status}, {self.currency}, {self.monthly_interest_rate}'
+        return f'SavingsAccount: {self.client_data.name}, {self.client_data.surname}, {self.account_number[-4:]}, {self._balance}, {self.min_balance}, {self.account_status}, {self.currency}, {self.monthly_interest_rate}'
 
     def get_account_info(self):
         account_info = {
             'id': self.id,
             'name': self.client_data.name,
             'surname': self.client_data.surname,
-            'account_number': self.client_data.account_number[-4:],
+            'account_number': self.account_number[-4:],
             'balance': self._balance,
             'status': self.account_status,
             'currency': self.currency,
@@ -30,7 +30,8 @@ class SavingsAccount(BankAccount):
         return account_info
     
     
-    def withdraw(self, amount): 
+    def withdraw(self, amount):
+        self._ensure_daytime() 
         self._ensure_active()
         self._ensure_amount(amount)
         potential_balance = self._balance - amount
