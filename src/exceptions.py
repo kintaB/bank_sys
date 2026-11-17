@@ -21,3 +21,15 @@ class TooManyAttemptsError(Exception):
 
 class DayTimeOperationError(Exception):
     pass
+
+class TransactionCancelledError(Exception):
+    pass
+
+class TransactionDeclinedError(Exception):
+    pass
+
+class TransactionRefundedError(Exception):
+    pass
+
+class TransactionRejectedError(Exception):
+    pass

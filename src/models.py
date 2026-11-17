@@ -33,3 +33,25 @@ class Portfolio(TypedDict):
     bonds: float
     stocks: float
     etf: float
+
+class TransactionStatus(Enum):
+    PENDING = 'pending'
+    COMPLETED = 'completed'
+    FAILED = 'failed'
+    CANCELLED = 'cancelled'
+    REFUNDED = 'refunded'
+    REJECTED = 'rejected'
+
+class TransactionType(Enum):
+    DEPOSIT = 'deposit'
+    WITHDRAWAL = 'withdrawal'
+    INVESTMENT = 'investment'
+    TRANSFER = 'transfer'
+    EXTERNAL_TRANSFER = 'external_transfer'
+
+class TransactionDeclinedReason(Enum):
+    INSUFFICIENT_FUNDS = 'insufficient_funds'
+    ACCOUNT_FROZEN = 'account_frozen'
+    ACCOUNT_CLOSED = 'account_closed'
+    INVALID_OPERATION = 'invalid_operation'
+    CANCELLED = 'cancelled'
