@@ -33,6 +33,7 @@ print(' ')
 print('HERE IS A PREMIUM TESTS:')
 print(' ')
 my_premium_acc_client = ClientData('Alina', 'Luch')
+my_premium_acc_client_2 = ClientData('Dima', 'Davidov')
 my_premium_acc = PremiumAccount(4, my_premium_acc_client, 15000, AccountStatus.ACTIVE, Currencies.EUR, 500, 1000, 50)
 my_premium_acc_2 = PremiumAccount(5, my_premium_acc_client, 1000, AccountStatus.ACTIVE, Currencies.RUB, 50000, 1000, 100)
 

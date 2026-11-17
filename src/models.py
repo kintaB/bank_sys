@@ -6,12 +6,16 @@ from typing import TypedDict
 class ClientData:
     name: str
     surname: str
-    account_number: str | None = None
 
 class AccountStatus(Enum):
     ACTIVE = 'active'
     FROZEN = 'frozen'
     CLOSED = 'closed'
+
+class ClientStatus(Enum):
+    ACTIVE = 'active'
+    BLOCKED = 'blocked'
+    DEPRECATED = 'deprecated'
 
 class Currencies(Enum):
     RUB = 'RUB'
@@ -29,3 +33,39 @@ class Portfolio(TypedDict):
     bonds: float
     stocks: float
     etf: float
+
+class TransactionStatus(Enum):
+    PENDING = 'pending'
+    COMPLETED = 'completed'
+    FAILED = 'failed'
+    CANCELLED = 'cancelled'
+    REFUNDED = 'refunded'
+    REJECTED = 'rejected'
+
+class TransactionType(Enum):
+    DEPOSIT = 'deposit'
+    WITHDRAWAL = 'withdrawal'
+    INVESTMENT = 'investment'
+    TRANSFER = 'transfer'
+    EXTERNAL_TRANSFER = 'external_transfer'
+
+class TransactionDeclinedReason(Enum):
+    INSUFFICIENT_FUNDS = 'insufficient_funds'
+    ACCOUNT_FROZEN = 'account_frozen'
+    ACCOUNT_CLOSED = 'account_closed'
+    INVALID_OPERATION = 'invalid_operation'
+    CANCELLED = 'cancelled'
+    HIGH_RISK = 'high_risk'
+
+
+class AuditSeverity(Enum):
+    INFO = 'info'
+    WARNING = 'warning'
+    ERROR = 'error'
+    CRITICAL = 'critical'
+
+
+class RiskLevel(Enum):
+    LOW = 'low'
+    MEDIUM = 'medium'
+    HIGH = 'high'

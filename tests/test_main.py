@@ -1,3 +1,4 @@
+
 import sys
 from pathlib import Path
 
@@ -6,6 +7,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.accounts.base import BankAccount
 from src.models import ClientData, AccountStatus, Currencies
 from src.exceptions import AccountFrozenError, InsufficientFundsError
+from datetime import datetime
 
 new_client = ClientData('John', 'Vandal')
 new_client2 = ClientData('Andrey', 'Karchunovskiy')
@@ -25,3 +27,6 @@ try:
     new_account2.deposit(555)
 except AccountFrozenError as e:
     print(e)
+
+
+print(datetime.now().hour)

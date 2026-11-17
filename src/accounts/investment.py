@@ -9,7 +9,7 @@ class InvestmentAccount(BankAccount):
 
     def __str__(self):
         return (
-            f'InvestmentAccount: {self.client_data.name}, {self.client_data.surname}, ****{self.client_data.account_number[-4:]}, ' 
+            f'InvestmentAccount: {self.client_data.name}, {self.client_data.surname}, ****{self.account_number[-4:]}, ' 
             f'balance={self._balance}, {self.currency}, '
             f'status={self.account_status} '
         ) 
@@ -19,7 +19,7 @@ class InvestmentAccount(BankAccount):
             'id': self.id,
             'name': self.client_data.name,
             'surname': self.client_data.surname,
-            'account_number': self.client_data.account_number[-4:],
+            'account_number': self.account_number[-4:],
             'balance': self._balance,
             'status': self.account_status,
             'currency': self.currency,
@@ -27,20 +27,22 @@ class InvestmentAccount(BankAccount):
         }
         return account_info
     
-    def withdraw(self, amount): 
+    def withdraw(self, amount):
+        self._ensure_daytime()
         self._ensure_active()
+        self._ensure_amount(amount)
         total = self._balance - amount
 
-        if amount <= 0:
-            raise InvalidOperationError(f'Invalid amount: {amount}')
-        
-        if total <= 0:
+        if total < 0:
             raise InsufficientFundsError(f'InsufficientFundsError')
 
         self._balance -= amount
 
     def invest(self, amount, asset):
-        if asset in Assets and amount > 0 and amount <= self._balance:
+        self._ensure_daytime()
+        self._ensure_active()
+        self._ensure_amount(amount)
+        if isinstance(asset, Assets) and amount <= self._balance:
             self._balance -= amount
             self.portfolio[asset.value] += amount
                
@@ -59,11 +61,12 @@ class InvestmentAccount(BankAccount):
         stocks_growth = self.portfolio['stocks'] * growth_rates['stocks']
         bonds_growth = self.portfolio['bonds'] * growth_rates['bonds']
         etf_growth = self.portfolio['etf'] * growth_rates['etf']
-
-        growths_info = {
-            'stocks_growth': stocks_growth,
-            'bonds_growth': bonds_growth,
-            'etf_growth': etf_growth
-        }
-
-        return growths_info
+        
+        # growths_info = {
+        #    'stocks_growth': stocks_growth,
+        #    'bonds_growth': bonds_growth,
+        #    'etf_growth': etf_growth
+        # }
+        
+        total_growth = stocks_growth + bonds_growth + etf_growth
+        return total_growth
