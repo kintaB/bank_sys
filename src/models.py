@@ -55,3 +55,17 @@ class TransactionDeclinedReason(Enum):
     ACCOUNT_CLOSED = 'account_closed'
     INVALID_OPERATION = 'invalid_operation'
     CANCELLED = 'cancelled'
+    HIGH_RISK = 'high_risk'
+
+
+class AuditSeverity(Enum):
+    INFO = 'info'
+    WARNING = 'warning'
+    ERROR = 'error'
+    CRITICAL = 'critical'
+
+
+class RiskLevel(Enum):
+    LOW = 'low'
+    MEDIUM = 'medium'
+    HIGH = 'high'

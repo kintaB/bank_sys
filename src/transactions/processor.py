@@ -3,7 +3,9 @@ from datetime import datetime
 from src.accounts.premium import PremiumAccount
 from src.models import (
     AccountStatus,
+    AuditSeverity,
     Currencies,
+    RiskLevel,
     TransactionDeclinedReason,
     TransactionStatus,
     TransactionType,
@@ -11,8 +13,10 @@ from src.models import (
 
 
 class TransactionProcessor:
-    def __init__(self, bank, external_fee_rate=0.02, max_retries=1):
+    def __init__(self, bank, audit_log=None, risk_analyzer=None, external_fee_rate=0.02, max_retries=1):
         self.bank = bank
+        self.audit_log = audit_log
+        self.risk_analyzer = risk_analyzer
         self.external_fee_rate = external_fee_rate
         self.max_retries = max_retries
         self.errors = []
@@ -22,7 +26,39 @@ class TransactionProcessor:
         for transaction in items:
             self.process_one(transaction)
 
+    def _log(self, message, severity, transaction_id=None):
+        if self.audit_log is not None:
+            self.audit_log.add(message, severity, transaction_id)
+
+    def _find_client_id_by_account(self, account_number):
+        for client_id in self.bank.clients:
+            client = self.bank.clients[client_id]
+            for number in client.accounts:
+                if number == account_number:
+                    return client_id
+        return None
+
     def process_one(self, transaction):
+        if self.risk_analyzer is not None:
+            level, reasons = self.risk_analyzer.analyze(transaction)
+            reason_text = ', '.join(reasons)
+
+            if level == RiskLevel.MEDIUM:
+                self._log('medium risk: ' + reason_text, AuditSeverity.WARNING, transaction.id)
+                client_id = self._find_client_id_by_account(transaction.sender)
+                if client_id is not None:
+                    self.bank.mark_suspicious(client_id, reason_text)
+
+            if level == RiskLevel.HIGH:
+                self._log('blocked high risk: ' + reason_text, AuditSeverity.CRITICAL, transaction.id)
+                transaction.transaction_status = TransactionStatus.REJECTED
+                transaction.declined_reason = TransactionDeclinedReason.HIGH_RISK
+                transaction.updated_at = datetime.now()
+                client_id = self._find_client_id_by_account(transaction.sender)
+                if client_id is not None:
+                    self.bank.mark_suspicious(client_id, 'blocked: ' + reason_text)
+                return
+
         attempts = 0
         last_error = None
 
@@ -33,10 +69,12 @@ class TransactionProcessor:
                 transaction.transaction_status = TransactionStatus.COMPLETED
                 transaction.declined_reason = None
                 transaction.updated_at = datetime.now()
+                self._log('completed ok', AuditSeverity.INFO, transaction.id)
                 return
             except Exception as error:
                 last_error = str(error)
                 self.errors.append(transaction.id + ': ' + last_error)
+                self._log(last_error, AuditSeverity.ERROR, transaction.id)
 
         transaction.transaction_status = TransactionStatus.FAILED
         transaction.declined_reason = self._reason_from_error(last_error)

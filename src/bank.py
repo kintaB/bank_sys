@@ -33,10 +33,13 @@ class Bank:
             raise YoungClientError('Age of suggested client is lower than 18')
         self.clients[client.id] = client
 
-    def open_account(self, client_id, account: BankAccount):
+    def open_account(self, client_id, account: BankAccount, risk_analyzer=None):
         number = account.account_number
         self.accounts[number] = account
         self.clients[client_id].accounts.append(number)
+
+        if risk_analyzer is not None:
+            risk_analyzer.register_account(number)
 
     def close_account(self, account_number):
         if self.accounts[account_number].account_status != AccountStatus.CLOSED:
