@@ -25,10 +25,12 @@ risk = RiskAnalyzer(large_amount=3000, frequent_limit=3)
 acc_a = BankAccount(1, ClientData('John', 'Vandal'), 20000, AccountStatus.ACTIVE, Currencies.USD)
 acc_b = BankAccount(2, ClientData('Alina', 'Luch'), 1000, AccountStatus.ACTIVE, Currencies.USD)
 acc_new = BankAccount(3, ClientData('Alina', 'Luch'), 100, AccountStatus.ACTIVE, Currencies.USD)
+acc_newer = BankAccount(4, ClientData('Alina', 'Luch'), 100, AccountStatus.ACTIVE, Currencies.USD)
 
-bank.open_account('c1', acc_a, risk_analyzer=risk)
-bank.open_account('c2', acc_b, risk_analyzer=risk)
+bank.open_account('c1', acc_a)
+bank.open_account('c2', acc_b)
 bank.open_account('c2', acc_new)
+bank.open_account('c2', acc_newer)
 
 queue = TransactionQueue()
 processor = TransactionProcessor(bank, audit_log=audit, risk_analyzer=risk)
@@ -40,7 +42,8 @@ txs = [
     Transaction('s2', TransactionType.TRANSFER, 200, Currencies.USD, acc_a.account_number, acc_new.account_number),
     Transaction('s3', TransactionType.WITHDRAWAL, 10, Currencies.USD, acc_a.account_number),
     Transaction('s4', TransactionType.WITHDRAWAL, 10, Currencies.USD, acc_a.account_number),
-    Transaction('s5', TransactionType.TRANSFER, 4000, Currencies.USD, acc_a.account_number, acc_new.account_number),
+    # large + brand-new receiver for this sender => HIGH and blocked
+    Transaction('s5', TransactionType.TRANSFER, 4000, Currencies.USD, acc_a.account_number, acc_newer.account_number),
 ]
 
 for tx in txs:

@@ -1,0 +1,129 @@
+2026-11-17 20:10:32.728359 | info | t02 | completed ok
+2026-11-17 20:10:32.728750 | info | t01 | completed ok
+2026-11-17 20:10:32.729067 | info | t03 | completed ok
+2026-11-17 20:10:32.729275 | info | t04 | completed ok
+2026-11-17 20:10:32.729517 | info | t05 | completed ok
+2026-11-17 20:10:32.729715 | info | t06 | completed ok
+2026-11-17 20:10:32.729894 | info | t07 | completed ok
+2026-11-17 20:10:32.730096 | info | t08 | completed ok
+2026-11-17 20:10:32.730324 | info | t09 | completed ok
+2026-11-17 20:10:32.730516 | info | t10 | completed ok
+2026-11-17 20:10:32.730697 | info | t11 | completed ok
+2026-11-17 20:10:32.730985 | info | t12 | completed ok
+2026-11-17 20:10:32.731182 | info | t13 | completed ok
+2026-11-17 20:10:32.731365 | info | t14 | completed ok
+2026-11-17 20:10:32.731541 | info | t15 | completed ok
+2026-11-17 20:10:32.731711 | info | t16 | completed ok
+2026-11-17 20:10:32.731882 | info | t17 | completed ok
+2026-11-17 20:10:32.732077 | info | t18 | completed ok
+2026-11-17 20:10:32.732258 | info | t19 | completed ok
+2026-11-17 20:10:32.732442 | info | t20 | completed ok
+2026-11-17 20:10:32.732618 | error | t21 | account is frozen
+2026-11-17 20:10:32.732806 | error | t21 | account is frozen
+2026-11-17 20:10:32.733085 | warning | t22 | medium risk: large amount
+2026-11-17 20:10:32.733340 | error | t22 | insufficient funds
+2026-11-17 20:10:32.733527 | error | t22 | insufficient funds
+2026-11-17 20:10:32.733712 | warning | t23 | medium risk: large amount, frequent operations
+2026-11-17 20:10:32.733888 | info | t23 | completed ok
+2026-11-17 20:10:32.734059 | warning | t24 | medium risk: transfer to new account, frequent operations
+2026-11-17 20:10:32.734241 | info | t24 | completed ok
+2026-11-17 20:10:32.734415 | critical | t25 | blocked high risk: large amount, transfer to new account, frequent operations
+2026-11-17 20:10:32.734590 | info | t26 | completed ok
+2026-11-17 20:10:32.734757 | info | t27 | completed ok
+2026-11-17 20:10:32.734923 | info | t28 | completed ok
+2026-11-17 20:10:32.735093 | info | t29 | completed ok
+2026-11-17 20:10:32.735271 | info | t30 | completed ok
+2026-11-17 20:10:32.735440 | info | t31 | completed ok
+2026-11-17 20:10:32.735605 | info | t32 | completed ok
+2026-11-17 20:10:32.735776 | info | t33 | completed ok
+2026-11-17 20:10:32.735951 | info | t34 | completed ok
+2026-11-17 20:10:32.843190 | info | t02 | completed ok
+2026-11-17 20:10:32.843437 | info | t01 | completed ok
+2026-11-17 20:10:32.843635 | info | t03 | completed ok
+2026-11-17 20:10:32.843883 | info | t04 | completed ok
+2026-11-17 20:10:32.844095 | info | t05 | completed ok
+2026-11-17 20:10:32.844282 | info | t06 | completed ok
+2026-11-17 20:10:32.844460 | info | t07 | completed ok
+2026-11-17 20:10:32.844641 | info | t08 | completed ok
+2026-11-17 20:10:32.844855 | info | t09 | completed ok
+2026-11-17 20:10:32.845038 | info | t10 | completed ok
+2026-11-17 20:10:32.845214 | info | t11 | completed ok
+2026-11-17 20:10:32.845392 | info | t12 | completed ok
+2026-11-17 20:10:32.845572 | info | t13 | completed ok
+2026-11-17 20:10:32.845793 | info | t14 | completed ok
+2026-11-17 20:10:32.846047 | info | t15 | completed ok
+2026-11-17 20:10:32.846286 | info | t16 | completed ok
+2026-11-17 20:10:32.846520 | info | t17 | completed ok
+2026-11-17 20:10:32.846739 | info | t18 | completed ok
+2026-11-17 20:10:32.846925 | info | t19 | completed ok
+2026-11-17 20:10:32.847105 | info | t20 | completed ok
+2026-11-17 20:10:32.847279 | error | t21 | account is frozen
+2026-11-17 20:10:32.847451 | error | t21 | account is frozen
+2026-11-17 20:10:32.847630 | warning | t22 | medium risk: large amount
+2026-11-17 20:10:32.847818 | error | t22 | insufficient funds
+2026-11-17 20:10:32.848028 | error | t22 | insufficient funds
+2026-11-17 20:10:32.848267 | warning | t23 | medium risk: large amount, frequent operations
+2026-11-17 20:10:32.848506 | info | t23 | completed ok
+2026-11-17 20:10:32.848744 | warning | t24 | medium risk: transfer to new account, frequent operations
+2026-11-17 20:10:32.848952 | info | t24 | completed ok
+2026-11-17 20:10:32.849190 | critical | t25 | blocked high risk: large amount, transfer to new account, frequent operations
+2026-11-17 20:10:32.849417 | info | t26 | completed ok
+2026-11-17 20:10:32.849618 | info | t27 | completed ok
+2026-11-17 20:10:32.849903 | info | t28 | completed ok
+2026-11-17 20:10:32.850137 | info | t29 | completed ok
+2026-11-17 20:10:32.850348 | info | t30 | completed ok
+2026-11-17 20:10:32.850534 | info | t31 | completed ok
+2026-11-17 20:10:32.850718 | info | t32 | completed ok
+2026-11-17 20:10:32.850904 | info | t33 | completed ok
+2026-11-17 20:10:32.851088 | info | t34 | completed ok
+2026-11-18 16:45:35.451453 | warning | t02 | medium risk: transfer to new account
+2026-11-18 16:45:35.451847 | info | t02 | completed ok
+2026-11-18 16:45:35.452173 | info | t01 | completed ok
+2026-11-18 16:45:35.452434 | info | t03 | completed ok
+2026-11-18 16:45:35.452658 | info | t04 | completed ok
+2026-11-18 16:45:35.452996 | warning | t05 | medium risk: transfer to new account
+2026-11-18 16:45:35.453216 | info | t05 | completed ok
+2026-11-18 16:45:35.453506 | warning | t06 | medium risk: transfer to new account
+2026-11-18 16:45:35.453732 | info | t06 | completed ok
+2026-11-18 16:45:35.453952 | info | t07 | completed ok
+2026-11-18 16:45:35.454237 | info | t08 | completed ok
+2026-11-18 16:45:35.454454 | warning | t09 | medium risk: transfer to new account
+2026-11-18 16:45:35.454699 | info | t09 | completed ok
+2026-11-18 16:45:35.454913 | info | t10 | completed ok
+2026-11-18 16:45:35.455119 | info | t11 | completed ok
+2026-11-18 16:45:35.455319 | warning | t12 | medium risk: transfer to new account
+2026-11-18 16:45:35.455523 | info | t12 | completed ok
+2026-11-18 16:45:35.455727 | info | t13 | completed ok
+2026-11-18 16:45:35.455930 | info | t14 | completed ok
+2026-11-18 16:45:35.456131 | warning | t15 | medium risk: transfer to new account
+2026-11-18 16:45:35.456331 | info | t15 | completed ok
+2026-11-18 16:45:35.456587 | info | t16 | completed ok
+2026-11-18 16:45:35.456844 | info | t17 | completed ok
+2026-11-18 16:45:35.457108 | warning | t18 | medium risk: transfer to new account, frequent operations
+2026-11-18 16:45:35.457379 | info | t18 | completed ok
+2026-11-18 16:45:35.457644 | warning | t19 | medium risk: transfer to new account
+2026-11-18 16:45:35.457911 | info | t19 | completed ok
+2026-11-18 16:45:35.458180 | info | t20 | completed ok
+2026-11-18 16:45:35.458387 | error | t21 | account with id: 8 is frozen
+2026-11-18 16:45:35.458659 | error | t21 | account with id: 8 is frozen
+2026-11-18 16:45:35.458932 | warning | t22 | medium risk: large amount
+2026-11-18 16:45:35.459197 | error | t22 | Insufficient Funds, deposit to continue operation
+2026-11-18 16:45:35.459463 | error | t22 | Insufficient Funds, deposit to continue operation
+2026-11-18 16:45:35.459747 | warning | t23 | medium risk: large amount, frequent operations
+2026-11-18 16:45:35.459969 | info | t23 | completed ok
+2026-11-18 16:45:35.460260 | warning | t24 | medium risk: transfer to new account, frequent operations
+2026-11-18 16:45:35.460511 | info | t24 | completed ok
+2026-11-18 16:45:35.460766 | warning | t25 | medium risk: large amount, frequent operations
+2026-11-18 16:45:35.460988 | error | t25 | Insufficient Funds, deposit to continue operation
+2026-11-18 16:45:35.461221 | error | t25 | Insufficient Funds, deposit to continue operation
+2026-11-18 16:45:35.461488 | info | t26 | completed ok
+2026-11-18 16:45:35.461753 | info | t27 | completed ok
+2026-11-18 16:45:35.461964 | info | t28 | completed ok
+2026-11-18 16:45:35.462172 | info | t29 | completed ok
+2026-11-18 16:45:35.462376 | warning | t30 | medium risk: transfer to new account, frequent operations
+2026-11-18 16:45:35.462646 | info | t30 | completed ok
+2026-11-18 16:45:35.462916 | info | t31 | completed ok
+2026-11-18 16:45:35.463192 | info | t32 | completed ok
+2026-11-18 16:45:35.463469 | info | t33 | completed ok
+2026-11-18 16:45:35.463741 | warning | t34 | medium risk: transfer to new account
+2026-11-18 16:45:35.464035 | info | t34 | completed ok

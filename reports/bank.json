@@ -1,0 +1,27 @@
+{
+  "type": "bank",
+  "clients": 7,
+  "accounts": 12,
+  "total_balance": 26927.4,
+  "top3": [
+    {
+      "client_id": "c3",
+      "balance": 6345.0
+    },
+    {
+      "client_id": "c1",
+      "balance": 4874.2
+    },
+    {
+      "client_id": "c5",
+      "balance": 4318.8
+    }
+  ],
+  "transactions": {
+    "completed": 31,
+    "failed": 2,
+    "rejected": 1,
+    "cancelled": 1,
+    "total": 35
+  }
+}

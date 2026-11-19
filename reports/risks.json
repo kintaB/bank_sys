@@ -1,0 +1,214 @@
+{
+  "type": "risks",
+  "counts": {
+    "low": 30,
+    "medium": 3,
+    "high": 1
+  },
+  "items": [
+    {
+      "transaction_id": "t02",
+      "sender": "0d156c27",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t01",
+      "sender": "0d156c27",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t03",
+      "sender": "8c8306f9",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t04",
+      "sender": "484fe041",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t05",
+      "sender": "247cdb0a",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t06",
+      "sender": "0d156c27",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t07",
+      "sender": "fc8b4e20",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t08",
+      "sender": "b45d3d70",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t09",
+      "sender": "b37a62ae",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t10",
+      "sender": "8c8306f9",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t11",
+      "sender": "247cdb0a",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t12",
+      "sender": "c141038c",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t13",
+      "sender": "fc8b4e20",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t14",
+      "sender": "b37a62ae",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t15",
+      "sender": "484fe041",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t16",
+      "sender": "a69cc0d2",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t17",
+      "sender": "b45d3d70",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t18",
+      "sender": "0d156c27",
+      "level": "low",
+      "reasons": "frequent operations"
+    },
+    {
+      "transaction_id": "t19",
+      "sender": "247cdb0a",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t20",
+      "sender": "c141038c",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t21",
+      "sender": "3d8b0ada",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t22",
+      "sender": "fc8b4e20",
+      "level": "medium",
+      "reasons": "large amount"
+    },
+    {
+      "transaction_id": "t23",
+      "sender": "0d156c27",
+      "level": "medium",
+      "reasons": "large amount, frequent operations"
+    },
+    {
+      "transaction_id": "t24",
+      "sender": "0d156c27",
+      "level": "medium",
+      "reasons": "transfer to new account, frequent operations"
+    },
+    {
+      "transaction_id": "t25",
+      "sender": "0d156c27",
+      "level": "high",
+      "reasons": "large amount, transfer to new account, frequent operations"
+    },
+    {
+      "transaction_id": "t26",
+      "sender": "0d156c27",
+      "level": "low",
+      "reasons": "frequent operations"
+    },
+    {
+      "transaction_id": "t27",
+      "sender": "0d156c27",
+      "level": "low",
+      "reasons": "frequent operations"
+    },
+    {
+      "transaction_id": "t28",
+      "sender": "0d156c27",
+      "level": "low",
+      "reasons": "frequent operations"
+    },
+    {
+      "transaction_id": "t29",
+      "sender": "8c8306f9",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t30",
+      "sender": "8c8306f9",
+      "level": "low",
+      "reasons": "frequent operations"
+    },
+    {
+      "transaction_id": "t31",
+      "sender": "ba3976e5",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t32",
+      "sender": "b37a62ae",
+      "level": "low",
+      "reasons": ""
+    },
+    {
+      "transaction_id": "t33",
+      "sender": "247cdb0a",
+      "level": "low",
+      "reasons": "frequent operations"
+    },
+    {
+      "transaction_id": "t34",
+      "sender": "484fe041",
+      "level": "low",
+      "reasons": ""
+    }
+  ]
+}

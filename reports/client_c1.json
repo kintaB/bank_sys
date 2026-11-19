@@ -1,0 +1,26 @@
+{
+  "type": "client",
+  "client_id": "c1",
+  "name": "John Vandal",
+  "total_balance": 4874.2,
+  "accounts": [
+    {
+      "account_number": "0d156c27",
+      "balance": 2794.2,
+      "status": "active",
+      "currency": "USD"
+    },
+    {
+      "account_number": "fc8b4e20",
+      "balance": 2080.0,
+      "status": "active",
+      "currency": "USD"
+    }
+  ],
+  "suspicious_marks": [
+    "large amount",
+    "large amount, frequent operations",
+    "transfer to new account, frequent operations",
+    "blocked: large amount, transfer to new account, frequent operations"
+  ]
+}
