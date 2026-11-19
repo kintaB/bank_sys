@@ -26,3 +26,24 @@
 2026-11-17 19:51:47.740544 | info | s3 | completed ok
 2026-11-17 19:51:47.740784 | info | s4 | completed ok
 2026-11-17 19:51:47.740978 | critical | s5 | blocked high risk: large amount, transfer to new account, frequent operations
+2026-11-18 16:45:19.541024 | info | n1 | completed ok
+2026-11-18 16:45:19.543471 | warning | n2 | medium risk: transfer to new account
+2026-11-18 16:45:19.543898 | info | n2 | completed ok
+2026-11-18 16:45:19.544283 | warning | s1 | medium risk: large amount, frequent operations
+2026-11-18 16:45:19.544658 | info | s1 | completed ok
+2026-11-18 16:45:19.545009 | warning | s2 | medium risk: transfer to new account, frequent operations
+2026-11-18 16:45:19.545321 | info | s2 | completed ok
+2026-11-18 16:45:19.545600 | info | s3 | completed ok
+2026-11-18 16:45:19.545890 | info | s4 | completed ok
+2026-11-18 16:45:19.546135 | warning | s5 | medium risk: large amount, frequent operations
+2026-11-18 16:45:19.546347 | info | s5 | completed ok
+2026-11-18 16:45:35.323067 | info | n1 | completed ok
+2026-11-18 16:45:35.323391 | warning | n2 | medium risk: transfer to new account
+2026-11-18 16:45:35.323642 | info | n2 | completed ok
+2026-11-18 16:45:35.323868 | warning | s1 | medium risk: large amount, frequent operations
+2026-11-18 16:45:35.324090 | info | s1 | completed ok
+2026-11-18 16:45:35.324316 | warning | s2 | medium risk: transfer to new account, frequent operations
+2026-11-18 16:45:35.324571 | info | s2 | completed ok
+2026-11-18 16:45:35.324868 | info | s3 | completed ok
+2026-11-18 16:45:35.325106 | info | s4 | completed ok
+2026-11-18 16:45:35.325346 | critical | s5 | blocked high risk: large amount, transfer to new account, frequent operations

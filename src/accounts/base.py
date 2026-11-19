@@ -41,8 +41,8 @@ class BankAccount(AbstractAccount):
             raise InvalidOperationError(f'Invalid account status: {self.account_status}')
         if not isinstance(self.currency, Currencies):
             raise InvalidOperationError(f'Invalid account currency: {self.currency}')
-        if self._balance < 0:
-            raise InvalidOperationError(f'Initial balance can not be negative: {self._balance}')
+        # same number rules as operation amounts, but 0 is allowed
+        self._ensure_number(self._balance, allow_zero=True)
 
     def _ensure_active(self):
         if self.account_status == AccountStatus.ACTIVE:
@@ -71,13 +71,20 @@ class BankAccount(AbstractAccount):
         }
         return account_info
 
+    def _ensure_number(self, value, allow_zero=False):
+        if not isinstance(value, (float, int)) or isinstance(value, bool):
+            raise InvalidOperationError(f'Invalid amount: {value}')
+        if not math.isfinite(value):
+            raise InvalidOperationError(f'Invalid amount: {value}')
+        if allow_zero:
+            if value < 0:
+                raise InvalidOperationError(f'Invalid amount: {value}')
+        else:
+            if value <= 0:
+                raise InvalidOperationError(f'Invalid amount: {value}')
+
     def _ensure_amount(self, amount):
-        if not isinstance(amount, (float, int)) or isinstance(amount, bool):
-            raise InvalidOperationError(f'Invalid amount: {amount}')
-        if not math.isfinite(amount):
-            raise InvalidOperationError(f'Invalid amount: {amount}')
-        if amount <= 0:
-            raise InvalidOperationError(f'Invalid amount: {amount}')
+        self._ensure_number(amount, allow_zero=False)
         
     def deposit(self, amount):
         self._ensure_daytime()

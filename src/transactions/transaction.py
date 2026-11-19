@@ -1,6 +1,8 @@
+import math
 from datetime import datetime
 
-from src.models import Currencies, TransactionStatus, TransactionType
+from src.exceptions import InvalidOperationError
+from src.models import TransactionStatus
 
 
 class Transaction:
@@ -17,6 +19,24 @@ class Transaction:
         self.declined_reason = None
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
+        self.validate()
+
+    def validate(self):
+        # amount must be a real number > 0
+        if not isinstance(self.amount, (float, int)) or isinstance(self.amount, bool):
+            raise InvalidOperationError(f'Invalid amount: {self.amount}')
+        if not math.isfinite(self.amount):
+            raise InvalidOperationError(f'Invalid amount: {self.amount}')
+        if self.amount <= 0:
+            raise InvalidOperationError(f'Invalid amount: {self.amount}')
+
+        # commission must be a real number >= 0
+        if not isinstance(self.commission, (float, int)) or isinstance(self.commission, bool):
+            raise InvalidOperationError(f'Invalid commission: {self.commission}')
+        if not math.isfinite(self.commission):
+            raise InvalidOperationError(f'Invalid commission: {self.commission}')
+        if self.commission < 0:
+            raise InvalidOperationError(f'Invalid commission: {self.commission}')
 
     def __str__(self):
         return (

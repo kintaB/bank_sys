@@ -1,0 +1,35 @@
+transaction_id,sender,level,reasons
+t02,0d156c27,low,
+t01,0d156c27,low,
+t03,8c8306f9,low,
+t04,484fe041,low,
+t05,247cdb0a,low,
+t06,0d156c27,low,
+t07,fc8b4e20,low,
+t08,b45d3d70,low,
+t09,b37a62ae,low,
+t10,8c8306f9,low,
+t11,247cdb0a,low,
+t12,c141038c,low,
+t13,fc8b4e20,low,
+t14,b37a62ae,low,
+t15,484fe041,low,
+t16,a69cc0d2,low,
+t17,b45d3d70,low,
+t18,0d156c27,low,frequent operations
+t19,247cdb0a,low,
+t20,c141038c,low,
+t21,3d8b0ada,low,
+t22,fc8b4e20,medium,large amount
+t23,0d156c27,medium,"large amount, frequent operations"
+t24,0d156c27,medium,"transfer to new account, frequent operations"
+t25,0d156c27,high,"large amount, transfer to new account, frequent operations"
+t26,0d156c27,low,frequent operations
+t27,0d156c27,low,frequent operations
+t28,0d156c27,low,frequent operations
+t29,8c8306f9,low,
+t30,8c8306f9,low,frequent operations
+t31,ba3976e5,low,
+t32,b37a62ae,low,
+t33,247cdb0a,low,frequent operations
+t34,484fe041,low,

@@ -33,13 +33,10 @@ class Bank:
             raise YoungClientError('Age of suggested client is lower than 18')
         self.clients[client.id] = client
 
-    def open_account(self, client_id, account: BankAccount, risk_analyzer=None):
+    def open_account(self, client_id, account: BankAccount):
         number = account.account_number
         self.accounts[number] = account
         self.clients[client_id].accounts.append(number)
-
-        if risk_analyzer is not None:
-            risk_analyzer.register_account(number)
 
     def close_account(self, account_number):
         if self.accounts[account_number].account_status != AccountStatus.CLOSED:
@@ -91,9 +88,26 @@ class Bank:
 
         return total_balance
 
+    def get_bank_total_balance(self):
+        total = 0.0
+        for account_number in self.accounts:
+            total = total + self.accounts[account_number]._balance
+        return total
+
     def get_clients_ranking(self):
         ranking = []
         for client_id in self.clients:
             ranking.append((client_id, self.get_total_balance(client_id)))
-        ranking.sort(key=lambda item: item[1], reverse=True)
+
+        # simple sort: highest balance first
+        i = 0
+        while i < len(ranking):
+            j = i + 1
+            while j < len(ranking):
+                if ranking[j][1] > ranking[i][1]:
+                    temp = ranking[i]
+                    ranking[i] = ranking[j]
+                    ranking[j] = temp
+                j = j + 1
+            i = i + 1
         return ranking
