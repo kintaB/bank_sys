@@ -7,6 +7,11 @@ from src.exceptions import (
     InsufficientFundsError,
     InvalidOperationError,
 )
+
+
+class _PartialExecution(Exception):
+    def __init__(self, original):
+        super().__init__(str(original))
 from src.models import (
     AuditSeverity,
     Currencies,
@@ -104,6 +109,9 @@ class TransactionProcessor:
                 last_error = str(error)
                 self.errors.append(transaction.id + ': ' + last_error)
                 self._log(last_error, AuditSeverity.ERROR, transaction.id)
+                # money already moved once: do not withdraw again
+                if isinstance(error, _PartialExecution):
+                    break
 
         print('REJECTED (failed):', transaction.id, last_error)
         transaction.transaction_status = TransactionStatus.FAILED
@@ -149,6 +157,25 @@ class TransactionProcessor:
         # uses account.withdraw -> status, daytime, savings/premium rules
         account.withdraw(amount)
 
+    def _ensure_ready(self, account, amount):
+        account._ensure_daytime()
+        account._ensure_active()
+        account._ensure_amount(amount)
+
+    def _apply_transfer(self, sender, debit_amount, receiver, credit_amount):
+        sender_before = sender._balance
+        receiver_before = receiver._balance
+        try:
+            self._debit(sender, debit_amount)
+            self._credit(receiver, credit_amount)
+        except Exception as error:
+            changed = sender._balance != sender_before or receiver._balance != receiver_before
+            sender._balance = sender_before
+            receiver._balance = receiver_before
+            if changed:
+                raise _PartialExecution(error) from error
+            raise
+
     def _execute(self, transaction):
         if transaction.type == TransactionType.DEPOSIT:
             account = self._get_account(transaction.receiver)
@@ -174,15 +201,16 @@ class TransactionProcessor:
 
             pay = self.convert(transaction.amount, transaction.currency, sender.currency)
             total = pay + transaction.commission
+            if transaction.type == TransactionType.EXTERNAL_TRANSFER:
+                total = total + pay * self.external_fee_rate
+
+            receive = self.convert(transaction.amount, transaction.currency, receiver.currency)
+            self._ensure_ready(sender, total)
+            self._ensure_ready(receiver, receive)
+            self._apply_transfer(sender, total, receiver, receive)
 
             if transaction.type == TransactionType.EXTERNAL_TRANSFER:
-                fee = pay * self.external_fee_rate
-                transaction.commission = transaction.commission + fee
-                total = total + fee
-
-            self._debit(sender, total)
-            receive = self.convert(transaction.amount, transaction.currency, receiver.currency)
-            self._credit(receiver, receive)
+                transaction.commission = transaction.commission + pay * self.external_fee_rate
             return
 
         raise InvalidOperationError('unknown type')
